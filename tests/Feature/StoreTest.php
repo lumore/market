@@ -28,7 +28,11 @@ class StoreTest extends TestCase
     {
         $store = Store::factory()->create();
 
-        Product::factory()->for($store)->create();
+        Product::factory()
+            ->count(1)
+            ->for($store)
+            ->hasCategory(1)
+            ->create();
 
         $this->assertCount(1, $store->products->toArray());
     }
